@@ -1,0 +1,36 @@
+.box
+{
+    
+    background-color: #fff;
+    display: inline-block;
+    margin: 12px;
+}
+.inner-box
+{
+    padding: 8px;
+}
+
+
+.mat-raised-button
+{
+    border-radius: 0px !important;
+    
+}
+
+button:focus {
+    outline: none !important;
+    outline:none !important;
+}
+
+button
+{
+    width: 117px !important;
+}
+
+.bg-white
+{
+position: fixed;
+z-index: 9999;
+top: 0px;
+}
+

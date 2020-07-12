@@ -1,0 +1,80 @@
+<mat-toolbar class="mat-elevation-z2 bg-white">
+  <span class="mr-2">Assignment</span>
+  
+  <button mat-raised-button color="primary" class="ml-2">Available</button>
+  <button mat-raised-button color="accent" class="ml-2">Booked</button>
+
+  <button class="ml-3" mat-raised-button matBadge="{{seat_avl}}"matBadgeColor="accent">
+    Total Available
+</button>
+<button class="ml-3" mat-raised-button matBadge="{{seat_book}}" matBadgeColor="primary">
+    Total Booked
+</button>
+</mat-toolbar>
+
+
+
+
+<div class="container-fluid" style="margin-top: 70px;">
+  <div class="row">
+    <div class="col-md-6"> 
+      <div class="mat-elevation-z2" style="padding:5px;"> 
+       
+        <form [formGroup]="seatBookForm" (ngSubmit)="onSubmit()">
+
+          <div class="">
+  
+              <mat-form-field class="full-width">
+                <input 
+                  type="number"
+                  name="total_seat_no"
+                  min="1" max="7"
+                  matInput
+                  [formControl]="seatBookForm.controls['total_seat_no']"
+                  placeholder="Enter your number" 
+                  value="">
+              </mat-form-field>
+              <small 
+                *ngIf="seatBookForm.controls['total_seat_no'].hasError('required') && seatBookForm.controls['total_seat_no'].touched" 
+                class="form-error-msg"> Number is required </small>
+            
+              
+  
+      <button mat-raised-button class="mat-primary full-width ml-3" [disabled]="seatBookForm.invalid">Booked</button>
+    </div> 
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid mt-2 mb-4">
+  <div class="row">
+    <div class="col-md-12">
+           <span *ngFor="let item of seat;">
+
+        <div class="box mat-elevation-z2"> 
+             <div class="inner-box" id="{{item.id}}" *ngIf="item.status==1 else isAvailable"matTooltip="Seat already booked" matBadge="{{item.id}}" matBadgeColor="primary">
+              <button mat-raised-button color="accent">
+                <mat-icon>accessible</mat-icon>
+                Booked</button>
+             </div>
+
+             <ng-template #isAvailable>
+                <div class="inner-box" id="{{item.id}}" matTooltip="Seat is available" matBadge="{{item.id}}" matBadgeColor="accent">
+                  <button mat-raised-button color="primary">
+                    <mat-icon>airline_seat_recline_normal</mat-icon>
+                    Available</button>
+                 </div>
+              </ng-template>
+          
+        </div>
+          
+        <div *ngIf="item.id%7==0"></div>
+
+    </span>
+
+    
+  </div>
+</div>       
